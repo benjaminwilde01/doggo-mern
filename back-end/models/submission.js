@@ -15,6 +15,6 @@ const dogSchema = mongoose.Schema({
     }
 })
 
-const submission = mongoose.model('submission', dogSchema)
+const Submission = mongoose.model('submission', dogSchema)
 
-export default submission
+export default Submission
