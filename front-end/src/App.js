@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Container, AppBar, Typography, Grow, Grid } from '@material-ui/core'
+import { useDispatch } from 'react-redux'
 
+import { getSubmissions } from './actions/submissions'
 import Submissions from './components/Submissions/Submissions'
 import Form from './components/Form/Form'
 import dog from './images/dog.svg'
@@ -8,6 +10,11 @@ import useStyles from './styles'
 
 export default function App() {
     const classes = useStyles()
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(getSubmissions())
+    }, [dispatch])
 
     return (
         <Container maxWidth="lg">
