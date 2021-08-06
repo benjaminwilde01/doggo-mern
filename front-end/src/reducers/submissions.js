@@ -2,9 +2,9 @@
 export default (submissions = [], action) => {
     switch (action.type) {
         case 'FETCH_ALL':
-            return submissions
+            return action.payload
         case 'CREATE':
-            return submissions
+            return [ ...submissions, action.payload]
         default:
             return submissions
     }
