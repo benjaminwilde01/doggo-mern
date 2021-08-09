@@ -9,7 +9,7 @@ import useStyles from './submissionStyles'
 import submissionsStyles from '../submissionsStyles'
 
 
-export default function Submission({ submission }) {
+export default function Submission({ submission, setCurrentId }) {
     const classes = useStyles()
 
     return (
@@ -20,7 +20,7 @@ export default function Submission({ submission }) {
                 <Typography variant='body2'>{ moment(submission.createdAt).fromNow() }</Typography>
             </div>
             <div className={ classes.overlay2 }>
-                <Button style={{ color: 'white' }} size='small' onClick={() => {}}>
+                <Button style={{ color: 'white' }} size='small' onClick={() => setCurrentId(submission._id)}>
                     <MoreHorizIcon fontSize='medium' />
                 </Button>
             </div>

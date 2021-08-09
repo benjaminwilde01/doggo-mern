@@ -21,3 +21,12 @@ export const createSubmission = (submission) => async (dispatch) => {
         console.log(error)
     }
 }
+
+export const updateSubmission = (id, submission) => async (dispatch) => {
+    try {
+        const { data } = await api.updateSubmission(id, submission)
+        dispatch({ type: 'UPDATE', payload: data })
+    } catch (error) {
+        console.log(error.message)
+    }
+}

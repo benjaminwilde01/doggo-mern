@@ -1,22 +1,32 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { TextField, Button, Typography, Paper } from '@material-ui/core'
 import FileBase from 'react-file-base64'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import useStyles from './formStyles'
-import { createSubmission } from '../../actions/submissions'
+import { createSubmission, updateSubmission } from '../../actions/submissions'
 
-export default function Form() {
+export default function Form({ currentId, setCurrentId }) {
     const [submissionData, setSubmissionData] = useState({
         dogName: '', author: '', hobbies: '', imgFile: ''
     })
+    const submission = useSelector((state) => currentId ? state.submissions.find((s) => s._id === currentId) : null)
     const classes = useStyles()
     const dispatch = useDispatch()
+
+    useEffect(() => {
+        if(submission) setSubmissionData(submission)
+    }, [submission])
 
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        dispatch(createSubmission(submissionData))
+        if(currentId) {
+            dispatch(updateSubmission(currentId, submissionData))
+        } else {
+            dispatch(createSubmission(submissionData))
+        }
+
     }
 
     const clear = () => {
