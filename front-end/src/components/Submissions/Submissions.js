@@ -1,4 +1,5 @@
 import React from 'react'
+import { Grid, CircularProgress } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 import Submission from './Submission/Submission'
 import useStyles from './submissionsStyles'
@@ -10,11 +11,14 @@ export default function Submissions() {
     console.log(submissions)
 
     return (
-        <>
-            <h1>SUBMISSIONS</h1>
-            <Submission />
-            <Submission />
-
-        </>
+        !submissions.length ? <CircularProgress /> : (
+            <Grid className={ classes.container } container alignItems='stretch' spacing={3}>
+                { submissions.map((submission) => (
+                    <Grid key={ submission._id } item xs={ 12 } sm={ 6 }>
+                        <Submission submission={ submission } />
+                    </Grid>
+                )) }
+            </Grid>
+        )
     )
 }
