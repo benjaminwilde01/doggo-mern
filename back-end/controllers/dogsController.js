@@ -1,6 +1,5 @@
-import pkg from 'mongoose';
-const { mongoose } = pkg;
-// import { mongoose } from 'mongoose'
+import mongoose from 'mongoose';
+
 import Submission from '../models/submission.js'
 
 export const getDogs = async (req, res) => {
@@ -31,10 +30,11 @@ export const createDogs = async (req, res) => {
 
 export const updateSubmission = async (req, res) => {
     const { id: _id } = req.params
+    const dog = req.body
 
-    if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send('No post with that id')
+    // if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send('No post with that id')
     
-    const updatedSubmission = await Submission.findByIdAndUpdate(_id, submission, { new: true })
+    const updatedSubmission = await Submission.findByIdAndUpdate(_id, dog, { new: true })
 
     res.json(updatedSubmission)
 }
